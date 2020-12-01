@@ -1,7 +1,6 @@
 tab = []
 with open('.\pierwszeDane.txt') as inputFile:
-    for line in inputFile:
-        tab.append(line)
+    tab = inputFile.readlines()
 tab = list(map(int, tab))
 for x in tab:
     for i in tab:
