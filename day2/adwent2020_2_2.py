@@ -1,6 +1,6 @@
 tab = []
 wynik = 0
-with open('.\drugieDane.txt') as inputFile:
+with open('drugieDane.txt') as inputFile:
     tab = inputFile.readlines()
 for x in tab:
     string = x.split(" ")
