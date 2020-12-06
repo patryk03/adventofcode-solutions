@@ -4,7 +4,7 @@ def fileReader():
         tab = inputFile.readlines()
     return tab
 
-def binary(upper, moves, range, char, allMoves):
+def binary(upper, moves, range, char):
     num = 0
     lower = 0
     cent = 0
@@ -17,11 +17,7 @@ def binary(upper, moves, range, char, allMoves):
             cent = lower
         num+=1
         if num == range:
-            if range == 3:
-                return cent
-            else:
-                otherNumber = binary(7, allMoves[7:], 3, "L", allMoves)
-                return (cent*8 + otherNumber)
+            return cent
 
 def myId(results):
     old = results[0]
@@ -30,12 +26,21 @@ def myId(results):
             return x-1
         old = x
 
-results = []
+def counter(moves):
+    results = []
+    for x in moves:
+        resultOne = binary(127, x[:7], 7, "F")
+        resultTwo = binary(7, x[7:], 3, "L")
+        results.append(resultOne * 8 + resultTwo)
+    return results
+
 moves = fileReader()
-for x in moves:
-    results.append(binary(127, x[:7], 7, "F", x))
+results = counter(moves)
 
 #first
+
 print("Max = ", max(results))
+
 #second
+
 print("My id = ", myId(sorted(results)))
