@@ -5,7 +5,6 @@ def fileReader():
     return tab
 
 def binary(upper, moves, range, char):
-    num = 0
     lower = 0
     cent = 0
     for i in moves:
@@ -15,9 +14,7 @@ def binary(upper, moves, range, char):
         else:
             lower = cent+1
             cent = lower
-        num+=1
-        if num == range:
-            return cent
+    return cent
 
 def myId(results):
     old = results[0]
@@ -29,8 +26,9 @@ def myId(results):
 def counter(moves):
     results = []
     for x in moves:
-        resultOne = binary(127, x[:7], 7, "F")
-        resultTwo = binary(7, x[7:], 3, "L")
+        toCheck = x.strip()
+        resultOne = binary(127, toCheck[:7], 7, "F")
+        resultTwo = binary(7, toCheck[7:], 3, "L")
         results.append(resultOne * 8 + resultTwo)
     return results
 
