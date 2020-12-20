@@ -45,7 +45,7 @@ def adressDecoder(mask):
         elif mask[x] == '1':
             whereToChange[x] = '1'
     return whereToChange
-
+ 
 def adressSpaceFinder(mask, locations, memorySpaces):
     changes = adressDecoder(mask)
     for x in locations:
