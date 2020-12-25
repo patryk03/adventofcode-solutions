@@ -60,9 +60,10 @@ def adressSpaceFinder(mask, locations, memorySpaces):
                 binAdress[index] = value
             else:
                 binNumber = 2**index
-                adress = copy.deepcopy(addToAdress)
-                for i in adress:
-                    addToAdress.append(i + binNumber)
+                newTab = []
+                for i in addToAdress:
+                    newTab.append(i + binNumber)
+                addToAdress.extend(newTab)
                 binAdress[index] = '0'
         binAdress = "".join(binAdress[::-1])
         decimalAdress = int(binAdress, 2)
