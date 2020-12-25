@@ -1,7 +1,5 @@
-
 import copy
 from collections import defaultdict
-from os import remove
 def reader():
     with open ('data16.txt') as inputFile:
         rules = set()
