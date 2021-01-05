@@ -47,7 +47,6 @@ def second_re_matcher(rules, messages):
     ans = 0
     re_sent = ''
     zero = rules['0'].split(' ')
-    longest_string = max(messages, len)
     for x in zero:
         re_sent += re_compiler(x, rules)
     compiled = re.compile(re_sent)
