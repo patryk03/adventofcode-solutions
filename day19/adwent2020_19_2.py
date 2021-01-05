@@ -11,34 +11,36 @@ def reader():
 def re_compiler(to_find, all_rules):
     sent = ''
     rule = all_rules[to_find]
-    if to_find == '8':
-        to_add = re_compiler('42', all_rules)
-        sent += '('
-        sent += to_add
-        for x in range(3):
-            sent+='|'
-            to_add += to_add
-            sent += to_add
-        sent+=')'
-        return sent
 
-    elif to_find == '11':
-        sent+='('
-        to_add =re_compiler('42', all_rules)
-        second_to_add = re_compiler('31', all_rules)
-        sent += to_add
-        sent+= second_to_add
-        for x in range(3):
-            sent+='|'
-            to_add += to_add
-            second_to_add += second_to_add
-            sent+=to_add
-            sent+=second_to_add
-        sent+=')'
-        return sent
+    # if to_find == '8':
+    #     to_add = re_compiler('42', all_rules)
+    #     sent += '('
+    #     sent += to_add
+    #     for x in range(3):
+    #         sent+='|'
+    #         to_add += to_add
+    #         sent += to_add
+    #     sent+=')'
+    #     return sent
 
-    elif '|' in rule:
-        rule = rule.split(' ')
+    # elif to_find == '11':
+    #     sent+='('
+    #     to_add =re_compiler('42', all_rules)
+    #     second_to_add = re_compiler('31', all_rules)
+    #     sent += to_add
+    #     sent+= second_to_add
+    #     for x in range(3):
+    #         sent+='|'
+    #         to_add += to_add
+    #         second_to_add += second_to_add
+    #         sent+=to_add
+    #         sent+=second_to_add
+    #     sent+=')'
+    #     return sent
+
+    if '|' in rule:
+        if to_find != '8' and to_find != '11':
+            rule = rule.split(' ')
         sent += '('
         for x in rule:
             if x != '|':
@@ -47,16 +49,16 @@ def re_compiler(to_find, all_rules):
             else:
                 sent += '|'
         sent += ')'
-        return sent
     elif '"' in rule:
         sent += rule.replace('"', '')
-        return sent
     else:
         rule = rule.split(' ')
         for x in rule:
             to_add = re_compiler(x, all_rules)
             sent += to_add
-        return sent
+    if to_find == '8':
+        sent = '('+sent+')+'
+    return sent
 
 def second_re_matcher(rules,tocheck):
     re_sent = ''
@@ -66,8 +68,9 @@ def second_re_matcher(rules,tocheck):
     
 
 rules, messages = reader()
+rules['11'] = ['42','31','|','42','42','31','31','|','42','42','42','31','31','31','|','42','42','42','42','31','31','31','31']
 a = second_re_matcher(rules, ['0'])
-a = re.compile(a)
+a = re.compile('^'+a+'$')
 num= 0
 for x in messages:
     if a.match(x):
